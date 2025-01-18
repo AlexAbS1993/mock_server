@@ -1,0 +1,24 @@
+{
+  "name": "mock_server",
+  "version": "0.1.0",
+  "description": "Простой сервер со множеством абстракций для удобной работы",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexAbS1993/mock_server.git"
+  },
+  "keywords": [
+    "server",
+    "rest",
+    "api"
+  ],
+  "author": "Alex Abetov <abetovalex93@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/AlexAbS1993/mock_server/issues"
+  },
+  "homepage": "https://github.com/AlexAbS1993/mock_server#readme"
+}
