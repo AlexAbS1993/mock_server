@@ -4,7 +4,8 @@
   "description": "Простой сервер со множеством абстракций для удобной работы",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,11 @@
     "url": "https://github.com/AlexAbS1993/mock_server/issues"
   },
   "homepage": "https://github.com/AlexAbS1993/mock_server#readme",
-  "dependencies": {
-    "jest": "^29.7.0"
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.3"
   }
 }
