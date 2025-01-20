@@ -5,11 +5,11 @@ export class Router {
     public routes_dictionary: { [key: string]: any } = {}
     private working_directory: null | { route: Route, [key: string]: any } = null
     defineRouteFor(path: string) {
-        this.injectRouteToDictionary(path)
-        return this
-    }
-    defined() {
-        this.unsetWorkingDirectory()
+        const route = new Route(path)
+        const parsedPath = this.path_parser(path)
+        const directory = this.resolveDictionaryNote(parsedPath)
+        directory.route = route
+        this.setWorkingDirectory(directory as { route: Route, [key: string]: any })
         return this
     }
     get(handler: any) {
@@ -30,17 +30,6 @@ export class Router {
     }
     private setWorkingDirectory(obj: { route: Route, [key: string]: any }) {
         this.working_directory = obj
-        return this
-    }
-    private unsetWorkingDirectory() {
-        this.working_directory = null
-    }
-    private injectRouteToDictionary(path: string) {
-        const route = new Route(path)
-        const parsedPath = this.path_parser(path)
-        const directory = this.resolveDictionaryNote(parsedPath)
-        directory.route = route
-        this.setWorkingDirectory(directory as { route: Route, [key: string]: any })
         return this
     }
     private path_parser(path: string) {
