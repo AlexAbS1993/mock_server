@@ -1,3 +1,4 @@
+import { Handler } from "./handlers/types"
 import { METHODS } from "./helpers/methods"
 import { url_parser_to_array } from "./helpers/url_parser"
 import { Route } from "./routes"
@@ -13,19 +14,19 @@ export class Router {
         this.setWorkingDirectory(directory as { route: Route, [key: string]: any })
         return this
     }
-    get(handler: any) {
+    get(handler: Handler<unknown, unknown>) {
         this.working_directory!.route.apply(METHODS.GET, handler)
         return this
     }
-    post(handler: any) {
+    post(handler: Handler<unknown, unknown>) {
         this.working_directory!.route.apply(METHODS.POST, handler)
         return this
     }
-    delete(handler: any) {
+    delete(handler: Handler<unknown, unknown>) {
         this.working_directory!.route.apply(METHODS.DELETE, handler)
         return this
     }
-    put(handler: any) {
+    put(handler: Handler<unknown, unknown>) {
         this.working_directory!.route.apply(METHODS.PUT, handler)
         return this
     }
