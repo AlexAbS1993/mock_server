@@ -1,4 +1,4 @@
-const Route = require("../router/routes/route")
+import Route from '../router/routes/index'
 
 describe('Route - класс, содержащий методы для работы с определенным путем', () => {
     const mock_path = '/mock/test'
@@ -22,7 +22,9 @@ describe('Route - класс, содержащий методы для рабо�
         }
         test('Route добавляет метод запроса и его обработчик', () => {
             route.apply(GET, mockHandlerObject, [])
+            // @ts-ignore
             expect(route.handlers[GET]).toBeDefined()
+            // @ts-ignore
             expect(Array.isArray(route.handlers[GET].mwrs)).toBe(true)
         })
         test('Route может вызвать обработчик', () => {
