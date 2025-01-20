@@ -1,5 +1,6 @@
+import { METHODS } from "./helpers/methods"
 import { url_parser_to_array } from "./helpers/url_parser"
-import Route from "./routes"
+import { Route } from "./routes"
 
 export class Router {
     public routes_dictionary: { [key: string]: any } = {}
@@ -13,19 +14,19 @@ export class Router {
         return this
     }
     get(handler: any) {
-        this.working_directory!.route.apply('GET', handler)
+        this.working_directory!.route.apply(METHODS.GET, handler)
         return this
     }
     post(handler: any) {
-        this.working_directory!.route.apply('POST', handler)
+        this.working_directory!.route.apply(METHODS.POST, handler)
         return this
     }
     delete(handler: any) {
-        this.working_directory!.route.apply('DELETE', handler)
+        this.working_directory!.route.apply(METHODS.DELETE, handler)
         return this
     }
     put(handler: any) {
-        this.working_directory!.route.apply('PUT', handler)
+        this.working_directory!.route.apply(METHODS.PUT, handler)
         return this
     }
     private setWorkingDirectory(obj: { route: Route, [key: string]: any }) {
