@@ -1,5 +1,7 @@
+import { Handler } from "./handlers/types"
+import { METHODS } from "./helpers/methods"
 import { url_parser_to_array } from "./helpers/url_parser"
-import Route from "./routes"
+import { Route } from "./routes"
 
 export class Router {
     public routes_dictionary: { [key: string]: any } = {}
@@ -12,20 +14,20 @@ export class Router {
         this.setWorkingDirectory(directory as { route: Route, [key: string]: any })
         return this
     }
-    get(handler: any) {
-        this.working_directory!.route.apply('GET', handler)
+    get(handler: Handler<unknown, unknown>) {
+        this.working_directory!.route.apply(METHODS.GET, handler)
         return this
     }
-    post(handler: any) {
-        this.working_directory!.route.apply('POST', handler)
+    post(handler: Handler<unknown, unknown>) {
+        this.working_directory!.route.apply(METHODS.POST, handler)
         return this
     }
-    delete(handler: any) {
-        this.working_directory!.route.apply('DELETE', handler)
+    delete(handler: Handler<unknown, unknown>) {
+        this.working_directory!.route.apply(METHODS.DELETE, handler)
         return this
     }
-    put(handler: any) {
-        this.working_directory!.route.apply('PUT', handler)
+    put(handler: Handler<unknown, unknown>) {
+        this.working_directory!.route.apply(METHODS.PUT, handler)
         return this
     }
     private setWorkingDirectory(obj: { route: Route, [key: string]: any }) {

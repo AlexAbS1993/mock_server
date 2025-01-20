@@ -1,3 +1,4 @@
+import { Handler } from '../handlers/types';
 import { METHODS } from './../helpers/methods';
 
 type handlersType = {
@@ -17,7 +18,7 @@ export class Route {
         this.#applyMiddlewares(method)
         return this.#applyHandler(method)
     }
-    apply(method: METHODS, handler: any, mwrs?: any) {
+    apply(method: METHODS, handler: Handler<unknown, unknown>, mwrs?: any) {
         if (!this.handlers[method]) {
             this.handlers[method] = {}
         }
