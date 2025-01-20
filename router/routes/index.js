@@ -1,2 +1,1 @@
-const Route = require('./route')
-module.exports = Route
+export {Route} from './route'
