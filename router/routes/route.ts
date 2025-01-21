@@ -14,9 +14,9 @@ export class Route {
         }
     }
 
-    resolve<dataType>(method: METHODS, data?: dataType) {
+    async resolve<dataType>(method: METHODS, data?: dataType) {
         // this.#applyMiddlewares(method, data)
-        return this.#applyHandler(method, data)
+        return await this.#applyHandler(method, data)
     }
     apply(method: METHODS, handler: Handler<unknown, unknown>, mwrs?: any) {
         if (!this.handlers[method]) {
@@ -39,7 +39,7 @@ export class Route {
     //         }
     //     });
     // }
-    #applyHandler<dataType>(method: METHODS, data: dataType) {
+    async #applyHandler<dataType>(method: METHODS, data: dataType) {
         try {
             return this.handlers[method].handler.execute(data)
         }
