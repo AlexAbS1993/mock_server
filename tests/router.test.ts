@@ -1,10 +1,13 @@
-import Route from "../router/routes"
+import { Route } from "../router/routes"
 import { Router } from "../router/router"
 import { url_parser_to_array } from "../router/helpers/url_parser"
 
 describe('Router принимает в себя роуты с обработчиками и выдаёт список роутов, проходя по списку зарегистрированных', () => {
     let router = new Router()
     const mock_path = '/test/feature'
+    beforeEach(() => {
+        router = new Router()
+    })
     test('url_parser работает корректно', () => {
         let parsedPath = url_parser_to_array(mock_path)
         expect(parsedPath[0]).toBe('test')
@@ -18,6 +21,18 @@ describe('Router принимает в себя роуты с обработчи
             expect(router.routes_dictionary.test).toBeDefined()
             expect(router.routes_dictionary.test.feature).toBeDefined()
             expect(router.routes_dictionary.test.feature.route instanceof Route).toBe(true)
+        })
+        test('Router после определения роута может добавлять на него обработчики методов', () => {
+            router
+                .defineRouteFor(mock_path)
+                .get({ execute() { } })
+                .put({ execute() { } })
+                .defineRouteFor(`${mock_path}/nextstep`)
+            expect(router.routes_dictionary.test).toBeDefined()
+            expect(router.routes_dictionary.test.feature).toBeDefined()
+            expect(router.routes_dictionary.test.feature.nextstep).toBeDefined()
+            expect(router.routes_dictionary.test.feature.route instanceof Route).toBe(true)
+            expect(router.routes_dictionary.test.feature.nextstep.route instanceof Route).toBe(true)
         })
     })
 })
