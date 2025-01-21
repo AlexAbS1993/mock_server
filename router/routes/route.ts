@@ -14,9 +14,9 @@ export class Route {
         }
     }
 
-    resolve(method: METHODS) {
-        this.#applyMiddlewares(method)
-        return this.#applyHandler(method)
+    async resolve<dataType>(method: METHODS, data?: dataType) {
+        // this.#applyMiddlewares(method, data)
+        return await this.#applyHandler(method, data)
     }
     apply(method: METHODS, handler: Handler<unknown, unknown>, mwrs?: any) {
         if (!this.handlers[method]) {
@@ -29,19 +29,19 @@ export class Route {
     getPath() {
         return this.#path
     }
-    #applyMiddlewares(method: METHODS) {
-        this.handlers[method].mwrs.forEach((middleware: any) => {
-            try {
-                middleware.execute()
-            }
-            catch (e) {
-                throw new Error(`Ошибка в ${middleware.getName()}`, { cause: e })
-            }
-        });
-    }
-    #applyHandler(method: METHODS) {
+    // #applyMiddlewares<dataType>(method: METHODS, data: dataType) {
+    //     this.handlers[method].mwrs.forEach((middleware: any) => {
+    //         try {
+    //             middleware.execute()
+    //         }
+    //         catch (e) {
+    //             throw new Error(`Ошибка в ${middleware.getName()}`, { cause: e })
+    //         }
+    //     });
+    // }
+    async #applyHandler<dataType>(method: METHODS, data: dataType) {
         try {
-            this.handlers[method].handler.execute()
+            return this.handlers[method].handler.execute(data)
         }
         catch (e) {
             throw new Error('Ошибка обработчика в методе ' + method + ' по пути ' + this.#path, { cause: e })
